@@ -1,0 +1,62 @@
+﻿<Window x:Name="settingWin" x:Class="DropOrganize.View.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DropOrganize.View"
+        xmlns:vm="clr-namespace:DropOrganize.ViewModel"
+        xmlns:prop="clr-namespace:DropOrganize.Properties"
+        mc:Ignorable="d"
+        Title="设置" Width="350" Height="400" ResizeMode="CanMinimize" Topmost="True" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <DockPanel LastChildFill="False">
+        <TabControl DockPanel.Dock="Top">
+            <TabItem Header="常规">
+                <StackPanel VerticalAlignment="Top" Margin="5,5,5,5" >
+                    <GroupBox Header="界面" HorizontalAlignment="Stretch">
+                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <CheckBox Content="置顶悬浮窗" Margin="0,5,0,5" IsChecked="{Binding Path=Topmost,Source={x:Static prop:Settings.Default},Mode=TwoWay}"/>
+                            <CheckBox Content="锁定悬浮窗" Margin="0,5,0,5" IsChecked="{Binding Path=Locked,Source={x:Static prop:Settings.Default},Mode=TwoWay}"/>
+                            <CheckBox Content="处理完成后显示通知" Margin="0,5,0,5" IsChecked="{Binding Path=ShowSuccess,Source={x:Static prop:Settings.Default},Mode=TwoWay}"/>
+                            <CheckBox Content="处理失败显示错误提示信息" Margin="0,5,0,5" IsChecked="{Binding Path=ShowError,Source={x:Static prop:Settings.Default},Mode=TwoWay}"/>
+
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="处理">
+                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <CheckBox x:Name="IsIncludeDir" Content="处理文件夹" Margin="0,5,0,5" IsChecked="{Binding Path=IncludeDir,Source={x:Static prop:Settings.Default},Mode=TwoWay}"/>
+                            <CheckBox IsEnabled="{Binding ElementName=IsIncludeDir, Path=IsChecked}" Content="递归处理文件夹内所有文件" Margin="0,5,0,5" IsChecked="{Binding Path=RecursionExec,Source={x:Static prop:Settings.Default},Mode=TwoWay}"/>
+                            <CheckBox Content="忽略未在配置文件中的文件" Margin="0,5,0,5" IsChecked="{Binding Path=SkipNotConf,Source={x:Static prop:Settings.Default},Mode=TwoWay}"/>
+                            <CheckBox Content="若文件被占用则复制而不是移动" Margin="0,5,0,5" IsChecked="{Binding Path=SkipOccupied,Source={x:Static prop:Settings.Default},Mode=TwoWay}"/>
+
+                        </StackPanel>
+                    </GroupBox>
+
+
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="高级">
+                <StackPanel VerticalAlignment="Top" Margin="5,5,5,5" >
+                    <GroupBox Header="自动解压">
+                        <StackPanel>
+                            <CheckBox Content="自动解压常见压缩包" Margin="0,5,0,5"/>
+                            <CheckBox Content="处理解压后的文件" Margin="0,5,0,5"/>
+                            <CheckBox Content="保留压缩包" Margin="0,5,0,5"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="关于">
+                <Grid />
+            </TabItem>
+        </TabControl>
+        <StackPanel Margin="0,0,0,10" DockPanel.Dock="Bottom" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button Content="保存" HorizontalAlignment="Left" Padding="10,0" Margin="10,0,10,0" VerticalAlignment="Top" Command="{Binding SaveSettingsPropCommand}" Click="CloseWin"/>
+            <Button Content="应用" HorizontalAlignment="Left" Padding="10,0" Margin="10,0,10,0" VerticalAlignment="Top" Command="{Binding SaveSettingsPropCommand}"/>
+            <Button Content="取消" HorizontalAlignment="Left" Padding="10,0" Margin="10,0,10,0" VerticalAlignment="Top" Click="CloseWin"/>
+        </StackPanel>
+    </DockPanel>
+</Window>

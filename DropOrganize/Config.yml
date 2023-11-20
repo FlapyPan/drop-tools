@@ -1,0 +1,22 @@
+﻿Rules:
+    - Name: 歌曲
+      Location: D:\
+      ExtName: 
+        - mp3
+        - ogg
+    - Name: 照片
+      Location: D:\
+      ExtName: 
+        - jpg
+        - png
+    - Name: 视频
+      Location: D:\
+      ExtName: 
+        - mp4
+        - mkv
+    - Name: 文档
+      Location: D:\
+      ExtName: 
+        - ppt
+        - docx
+
